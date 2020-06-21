@@ -1,9 +1,10 @@
 
 package com.igomall.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.igomall.dao.AdminDao;
 import com.igomall.entity.Admin;
-import org.springframework.stereotype.Repository;
 
 /**
  * Dao - 管理员

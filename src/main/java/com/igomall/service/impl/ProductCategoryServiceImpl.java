@@ -1,18 +1,28 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: NIBVKj217ZJg7Aqw3Ce8RjtTuPoB0sx2
+ */
 package com.igomall.service.impl;
 
-import com.igomall.dao.ProductCategoryDao;
-import com.igomall.entity.ProductCategory;
-import com.igomall.service.ProductCategoryService;
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.List;
+import com.igomall.Filter;
+import com.igomall.Order;
+import com.igomall.dao.ProductCategoryDao;
+import com.igomall.entity.ProductCategory;
+import com.igomall.entity.Store;
+import com.igomall.service.ProductCategoryService;
 
 /**
  * Service - 商品分类
@@ -25,6 +35,12 @@ public class ProductCategoryServiceImpl extends BaseServiceImpl<ProductCategory,
 
 	@Resource
 	private ProductCategoryDao productCategoryDao;
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ProductCategory> findList(Store store, Integer count, List<Filter> filters, List<Order> orders) {
+		return productCategoryDao.findList(store, count, filters, orders);
+	}
 
 	@Override
 	@Transactional(readOnly = true)

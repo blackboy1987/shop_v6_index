@@ -1,4 +1,9 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: BoOUeC01ZRoj6DPdBtRDEs4pf9d8kw9Y
+ */
 package com.igomall.dao.impl;
 
 import java.io.Serializable;
@@ -21,10 +26,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
-import com.igomall.dao.BaseDao;
-import com.igomall.entity.BaseEntity;
-import com.igomall.entity.OrderedEntity;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +37,9 @@ import com.igomall.Filter;
 import com.igomall.Order;
 import com.igomall.Page;
 import com.igomall.Pageable;
+import com.igomall.dao.BaseDao;
+import com.igomall.entity.BaseEntity;
+import com.igomall.entity.OrderedEntity;
 
 /**
  * Dao - 基类

@@ -1,10 +1,10 @@
 
 package com.igomall.dao.impl;
 
-import com.igomall.dao.PluginConfigDao;
-import com.igomall.entity.PluginConfig;
 import org.springframework.stereotype.Repository;
 
+import com.igomall.dao.PluginConfigDao;
+import com.igomall.entity.PluginConfig;
 
 /**
  * Dao - 插件配置

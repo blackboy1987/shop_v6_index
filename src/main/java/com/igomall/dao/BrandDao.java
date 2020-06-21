@@ -1,12 +1,12 @@
 
 package com.igomall.dao;
 
+import java.util.List;
+
 import com.igomall.Filter;
 import com.igomall.Order;
 import com.igomall.entity.Brand;
 import com.igomall.entity.ProductCategory;
-
-import java.util.List;
 
 /**
  * Dao - 品牌

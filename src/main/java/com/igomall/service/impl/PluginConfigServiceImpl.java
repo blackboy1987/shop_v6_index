@@ -1,14 +1,21 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: ZAYvn1plPyeQabMIiStF5pRNCebPX3G4
+ */
 package com.igomall.service.impl;
 
-import com.igomall.dao.PluginConfigDao;
-import com.igomall.entity.PluginConfig;
-import com.igomall.service.PluginConfigService;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.igomall.dao.PluginConfigDao;
+import com.igomall.entity.PluginConfig;
+import com.igomall.service.PluginConfigService;
 
 /**
  * Service - 插件配置
@@ -19,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PluginConfigServiceImpl extends BaseServiceImpl<PluginConfig, Long> implements PluginConfigService {
 
-	@Autowired
+	@Resource
 	private PluginConfigDao pluginConfigDao;
 
 	@Override

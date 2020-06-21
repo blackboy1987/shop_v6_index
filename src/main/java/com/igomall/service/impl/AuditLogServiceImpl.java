@@ -1,7 +1,8 @@
 
 package com.igomall.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import com.igomall.service.AuditLogService;
 @Service
 public class AuditLogServiceImpl extends BaseServiceImpl<AuditLog, Long> implements AuditLogService {
 
-	@Autowired
+	@Resource
 	private AuditLogDao auditLogDao;
 
 	@Override

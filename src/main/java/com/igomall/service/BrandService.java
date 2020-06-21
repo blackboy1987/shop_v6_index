@@ -1,12 +1,12 @@
 
 package com.igomall.service;
 
+import java.util.List;
+
 import com.igomall.Filter;
 import com.igomall.Order;
 import com.igomall.entity.Brand;
 import com.igomall.entity.ProductCategory;
-
-import java.util.List;
 
 /**
  * Service - 品牌

@@ -1,33 +1,11 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: Q+2++vDW8ZJd/9DNRCHOk0q25J4O4aPB
+ */
 package com.igomall.service.impl;
 
-import com.igomall.Setting;
-import com.igomall.dao.UserDao;
-import com.igomall.entity.User;
-import com.igomall.event.UserLoggedInEvent;
-import com.igomall.event.UserLoggedOutEvent;
-import com.igomall.event.UserRegisteredEvent;
-import com.igomall.security.AuthenticationProvider;
-import com.igomall.security.UserAuthenticationToken;
-import com.igomall.service.UserService;
-import com.igomall.util.SystemUtils;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.Element;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.time.DateUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-
-import javax.persistence.LockModeType;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +13,47 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.Resource;
+import javax.persistence.LockModeType;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.HostAuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.Element;
+import com.igomall.Setting;
+import com.igomall.dao.UserDao;
+import com.igomall.entity.User;
+import com.igomall.event.UserLoggedInEvent;
+import com.igomall.event.UserLoggedOutEvent;
+import com.igomall.event.UserRegisteredEvent;
+import com.igomall.security.AuthenticationProvider;
+import com.igomall.security.SocialUserAuthenticationToken;
+import com.igomall.security.UserAuthenticationToken;
+import com.igomall.service.UserService;
+import com.igomall.util.SystemUtils;
+
 /**
  * Service - 用户
  * 
- * @author blackboy
- * @version 1.0
+ * @author 好源++ Team
+ * @version 6.1
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, Long> implements UserService {
@@ -49,13 +63,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	 */
 	private static final Map<Class<?>, AuthenticationProvider> AUTHENTICATION_PROVIDER_CACHE = new ConcurrentHashMap<>();
 
-	@Autowired
+	@Resource
 	private ApplicationEventPublisher applicationEventPublisher;
-	@Autowired
+	@Resource
 	private List<AuthenticationProvider> authenticationProviders;
-	@Autowired
+	@Resource
 	private CacheManager cacheManager;
-	@Autowired
+	@Resource
 	private UserDao userDao;
 
 	@Override
@@ -67,8 +81,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	@Override
 	@Transactional(noRollbackFor = AuthenticationException.class)
 	public User getUser(AuthenticationToken authenticationToken) {
-		Assert.notNull(authenticationToken,"");
-		Assert.state(authenticationToken instanceof UserAuthenticationToken,"");
+		Assert.notNull(authenticationToken, "[Assertion failed] - authenticationToken is required; it must not be null");
+		Assert.state(authenticationToken instanceof UserAuthenticationToken || authenticationToken instanceof SocialUserAuthenticationToken, "[Assertion failed] - authenticationToken must be instanceof UserAuthenticationToken or SocialUserAuthenticationToken");
 
 		User user = null;
 		if (authenticationToken instanceof UserAuthenticationToken) {
@@ -81,6 +95,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 			}
 			AuthenticationProvider authenticationProvider = getAuthenticationProvider(userClass);
 			user = authenticationProvider != null ? authenticationProvider.getUser(principal) : null;
+		} else if (authenticationToken instanceof SocialUserAuthenticationToken) {
+			SocialUserAuthenticationToken socialUserAuthenticationToken = (SocialUserAuthenticationToken) authenticationToken;
+			user = socialUserAuthenticationToken.getSocialUser() != null ? socialUserAuthenticationToken.getSocialUser().getUser() : null;
 		}
 
 		if (user == null) {
@@ -112,7 +129,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	@Override
 	@Transactional(readOnly = true)
 	public Set<String> getPermissions(User user) {
-		Assert.notNull(user,"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
 
 		AuthenticationProvider authenticationProvider = getAuthenticationProvider(user.getClass());
 		return authenticationProvider != null ? authenticationProvider.getPermissions(user) : null;
@@ -120,8 +137,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 
 	@Override
 	public void register(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(user.isNew(), "[Assertion failed] - user must be new");
 
 		userDao.persist(user);
 
@@ -130,7 +147,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 
 	@Override
 	public void login(AuthenticationToken authenticationToken) {
-		Assert.notNull(authenticationToken,"");
+		Assert.notNull(authenticationToken, "[Assertion failed] - authenticationToken is required; it must not be null");
 
 		Subject subject = SecurityUtils.getSubject();
 		subject.login(authenticationToken);
@@ -158,6 +175,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 		return getCurrent(userClass, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public <T extends User> T getCurrent(Class<T> userClass, LockModeType lockModeType) {
@@ -175,8 +193,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	@Override
 	@Transactional(readOnly = true)
 	public int getFailedLoginAttempts(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(!user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(!user.isNew(), "[Assertion failed] - user must not be new");
 
 		Ehcache cache = cacheManager.getEhcache(User.FAILED_LOGIN_ATTEMPTS_CACHE_NAME);
 		Element element = cache.get(user.getId());
@@ -187,8 +205,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	@Override
 	@Transactional(readOnly = true)
 	public void addFailedLoginAttempt(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(!user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(!user.isNew(), "[Assertion failed] - user must not be new");
 
 		Long userId = user.getId();
 		Ehcache cache = cacheManager.getEhcache(User.FAILED_LOGIN_ATTEMPTS_CACHE_NAME);
@@ -209,8 +227,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	@Override
 	@Transactional(readOnly = true)
 	public void resetFailedLoginAttempts(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(!user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(!user.isNew(), "[Assertion failed] - user must not be new");
 
 		Ehcache cache = cacheManager.getEhcache(User.FAILED_LOGIN_ATTEMPTS_CACHE_NAME);
 		cache.remove(user.getId());
@@ -218,8 +236,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 
 	@Override
 	public boolean tryLock(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(!user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(!user.isNew(), "[Assertion failed] - user must not be new");
 
 		if (BooleanUtils.isTrue(user.getIsLocked())) {
 			return true;
@@ -239,8 +257,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 
 	@Override
 	public boolean tryUnlock(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(!user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(!user.isNew(), "[Assertion failed] - user must not be new");
 
 		if (BooleanUtils.isFalse(user.getIsLocked())) {
 			return true;
@@ -260,8 +278,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 
 	@Override
 	public void unlock(User user) {
-		Assert.notNull(user,"");
-		Assert.isTrue(!user.isNew(),"");
+		Assert.notNull(user, "[Assertion failed] - user is required; it must not be null");
+		Assert.isTrue(!user.isNew(), "[Assertion failed] - user must not be new");
 
 		if (BooleanUtils.isFalse(user.getIsLocked())) {
 			return;
@@ -322,7 +340,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	 * @return 认证Provider，若不存在则返回null
 	 */
 	private AuthenticationProvider getAuthenticationProvider(Class<?> userClass) {
-		Assert.notNull(userClass,"");
+		Assert.notNull(userClass, "[Assertion failed] - userClass is required; it must not be null");
 
 		if (AUTHENTICATION_PROVIDER_CACHE.containsKey(userClass)) {
 			return AUTHENTICATION_PROVIDER_CACHE.get(userClass);

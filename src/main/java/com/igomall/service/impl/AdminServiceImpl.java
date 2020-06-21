@@ -1,21 +1,22 @@
 
 package com.igomall.service.impl;
 
-import com.igomall.dao.AdminDao;
-import com.igomall.entity.Admin;
-import com.igomall.entity.Role;
-import com.igomall.entity.User;
-import com.igomall.service.AdminService;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import com.igomall.dao.AdminDao;
+import com.igomall.entity.Admin;
+import com.igomall.entity.Role;
+import com.igomall.entity.User;
+import com.igomall.service.AdminService;
 
 /**
  * Service - 管理员
@@ -26,7 +27,7 @@ import java.util.Set;
 @Service
 public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements AdminService {
 
-	@Autowired
+	@Resource
 	private AdminDao adminDao;
 
 	@Override

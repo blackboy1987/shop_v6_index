@@ -1,15 +1,35 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: y/0bnbb2gmb1qSD03zeUG5oGUHFFUkHw
+ */
 package com.igomall.dao.impl;
 
-import com.igomall.dao.ProductCategoryDao;
-import com.igomall.entity.ProductCategory;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
-import java.util.*;
+import com.igomall.Filter;
+import com.igomall.Order;
+import com.igomall.dao.ProductCategoryDao;
+import com.igomall.entity.ProductCategory;
+import com.igomall.entity.Store;
 
 /**
  * Dao - 商品分类
@@ -19,6 +39,20 @@ import java.util.*;
  */
 @Repository
 public class ProductCategoryDaoImpl extends BaseDaoImpl<ProductCategory, Long> implements ProductCategoryDao {
+
+	@Override
+	public List<ProductCategory> findList(Store store, Integer count, List<Filter> filters, List<Order> orders) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<ProductCategory> criteriaQuery = criteriaBuilder.createQuery(ProductCategory.class);
+		Root<ProductCategory> root = criteriaQuery.from(ProductCategory.class);
+		criteriaQuery.select(root);
+		Predicate restrictions = criteriaBuilder.conjunction();
+		if (store != null) {
+			restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.join("stores"), store));
+		}
+		criteriaQuery.where(restrictions);
+		return super.findList(criteriaQuery);
+	}
 
 	@Override
 	public List<ProductCategory> findRoots(Integer count) {

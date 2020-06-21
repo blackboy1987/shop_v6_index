@@ -1,9 +1,10 @@
 
 package com.igomall.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.igomall.dao.AuditLogDao;
 import com.igomall.entity.AuditLog;
-import org.springframework.stereotype.Repository;
 
 /**
  * Dao - 审计日志

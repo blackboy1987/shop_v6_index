@@ -1,4 +1,9 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: mRMQjsYdnKhrEP8PA8iJwqVQ3Ii1Phps
+ */
 package com.igomall.service;
 
 import com.igomall.entity.AuditLog;

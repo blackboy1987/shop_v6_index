@@ -1,17 +1,16 @@
 
 package com.igomall.dao;
 
-import com.igomall.Filter;
-import com.igomall.Order;
-import com.igomall.Page;
-import com.igomall.Pageable;
-import com.igomall.entity.BaseEntity;
-
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.LockModeType;
 
+import com.igomall.Filter;
+import com.igomall.Order;
+import com.igomall.Page;
+import com.igomall.Pageable;
+import com.igomall.entity.BaseEntity;
 
 /**
  * Dao - 基类

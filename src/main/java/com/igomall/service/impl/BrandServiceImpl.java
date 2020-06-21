@@ -1,6 +1,16 @@
 
 package com.igomall.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.igomall.Filter;
 import com.igomall.Order;
 import com.igomall.dao.BrandDao;
@@ -8,14 +18,6 @@ import com.igomall.dao.ProductCategoryDao;
 import com.igomall.entity.Brand;
 import com.igomall.entity.ProductCategory;
 import com.igomall.service.BrandService;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Service - 品牌

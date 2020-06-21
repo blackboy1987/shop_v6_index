@@ -1,9 +1,17 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: cxMKcmP3A+3sfXnuOSQHP99hpaficdD8
+ */
 package com.igomall.service;
 
-import com.igomall.entity.ProductCategory;
-
 import java.util.List;
+
+import com.igomall.Filter;
+import com.igomall.Order;
+import com.igomall.entity.ProductCategory;
+import com.igomall.entity.Store;
 
 /**
  * Service - 商品分类
@@ -12,6 +20,21 @@ import java.util.List;
  * @version 6.1
  */
 public interface ProductCategoryService extends BaseService<ProductCategory, Long> {
+
+	/**
+	 * 查找商品分类
+	 * 
+	 * @param store
+	 *            店铺
+	 * @param count
+	 *            数量
+	 * @param filters
+	 *            筛选
+	 * @param orders
+	 *            排序
+	 * @return 商品分类
+	 */
+	List<ProductCategory> findList(Store store, Integer count, List<Filter> filters, List<Order> orders);
 
 	/**
 	 * 查找顶级商品分类

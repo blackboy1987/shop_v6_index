@@ -1,17 +1,24 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: C0phy6n6UoQw5/OBXc29+/BZouejiCMF
+ */
 package com.igomall.dao.impl;
+
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.springframework.stereotype.Repository;
 
 import com.igomall.Filter;
 import com.igomall.Order;
 import com.igomall.dao.BrandDao;
 import com.igomall.entity.Brand;
 import com.igomall.entity.ProductCategory;
-import org.springframework.stereotype.Repository;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
 
 /**
  * Dao - 品牌

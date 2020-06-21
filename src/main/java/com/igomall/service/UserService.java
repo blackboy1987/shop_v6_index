@@ -1,4 +1,9 @@
-
+/*
+ * Copyright 2008-2018 shopxx.net. All rights reserved.
+ * Support: localhost
+ * License: localhost/license
+ * FileId: MZSr4x3Rf0Eh+cuWhuOVqusO4WCFbJOm
+ */
 package com.igomall.service;
 
 import java.util.Set;

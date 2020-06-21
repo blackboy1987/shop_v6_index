@@ -8,9 +8,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -41,7 +42,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Seria
 	 */
 	private BaseDao<T, ID> baseDao;
 
-	@Autowired
+	@Resource
 	protected void setBaseDao(BaseDao<T, ID> baseDao) {
 		this.baseDao = baseDao;
 	}
@@ -58,6 +59,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Seria
 		return findList(null, null, null, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public List<T> findList(ID... ids) {

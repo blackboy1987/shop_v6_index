@@ -1,9 +1,10 @@
 
 package com.igomall.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.igomall.dao.UserDao;
 import com.igomall.entity.User;
-import org.springframework.stereotype.Repository;
 
 /**
  * Dao - 用户
