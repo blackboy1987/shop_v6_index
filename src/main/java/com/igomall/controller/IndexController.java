@@ -1,9 +1,4 @@
-/*
- * Copyright 2008-2018 shopxx.net. All rights reserved.
- * Support: localhost
- * License: localhost/license
- * FileId: NBcohlMuQa0ncQlHrrCNxV/Q1DkO0t4V
- */
+
 package com.igomall.controller;
 
 import org.springframework.stereotype.Controller;

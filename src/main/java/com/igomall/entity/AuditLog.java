@@ -1,16 +1,10 @@
 
 package com.igomall.entity;
 
-import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Converter;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-
 import com.igomall.BaseAttributeConverter;
+
+import javax.persistence.*;
+import java.util.Map;
 
 /**
  * Entity - 审计日志

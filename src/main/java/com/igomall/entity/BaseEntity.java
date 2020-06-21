@@ -1,33 +1,18 @@
 
 package com.igomall.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.TableGenerator;
-import javax.persistence.Transient;
-import javax.persistence.Version;
-import javax.validation.groups.Default;
-
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.DateBridge;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Resolution;
-import org.hibernate.search.annotations.SortableField;
-import org.hibernate.search.annotations.Store;
-
 import com.fasterxml.jackson.annotation.JsonView;
-
 import com.igomall.audit.AuditingEntityListener;
 import com.igomall.audit.CreatedDate;
 import com.igomall.audit.LastModifiedDate;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.*;
+
+import javax.persistence.*;
+import javax.validation.groups.Default;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Entity - 基类
@@ -87,8 +72,9 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 	 */
 	@JsonView(BaseView.class)
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "tableGenerator")
-	@TableGenerator(name = "tableGenerator", table = "IdGenerator")
+	//@GeneratedValue(strategy = GenerationType.TABLE, generator = "tableGenerator")
+	// @TableGenerator(name = "tableGenerator", table = "IdGenerator")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ID id;
 
 	/**

@@ -1,13 +1,23 @@
 
 package com.igomall.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 /**
  * Entity - 用户
@@ -79,10 +89,40 @@ public abstract class User extends BaseEntity<Long> {
 	private Set<SocialUser> socialUsers = new HashSet<>();
 
 	/**
+	 * 支付事务
+	 */
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Set<PaymentTransaction> paymentTransactions = new HashSet<>();
+
+	/**
 	 * 审计日志
 	 */
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private Set<AuditLog> auditLogs = new HashSet<>();
+
+	/**
+	 * 发送的消息
+	 */
+	@OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Set<Message> fromMessages = new HashSet<>();
+
+	/**
+	 * 接收的消息
+	 */
+	@OneToMany(mappedBy = "toUser", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Set<Message> toMessages = new HashSet<>();
+
+	/**
+	 * 用户1的消息组
+	 */
+	@OneToMany(mappedBy = "user1", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Set<MessageGroup> user1MessageGroups = new HashSet<>();
+
+	/**
+	 * 用户2的消息组
+	 */
+	@OneToMany(mappedBy = "user2", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Set<MessageGroup> user2MessageGroups = new HashSet<>();
 
 	/**
 	 * 获取是否启用
@@ -199,6 +239,25 @@ public abstract class User extends BaseEntity<Long> {
 	}
 
 	/**
+	 * 获取支付事务
+	 * 
+	 * @return 支付事务
+	 */
+	public Set<PaymentTransaction> getPaymentTransactions() {
+		return paymentTransactions;
+	}
+
+	/**
+	 * 设置支付事务
+	 * 
+	 * @param paymentTransactions
+	 *            支付事务
+	 */
+	public void setPaymentTransactions(Set<PaymentTransaction> paymentTransactions) {
+		this.paymentTransactions = paymentTransactions;
+	}
+
+	/**
 	 * 获取审计日志
 	 * 
 	 * @return 审计日志
@@ -215,6 +274,82 @@ public abstract class User extends BaseEntity<Long> {
 	 */
 	public void setAuditLogs(Set<AuditLog> auditLogs) {
 		this.auditLogs = auditLogs;
+	}
+
+	/**
+	 * 获取发送的消息
+	 * 
+	 * @return 发送的消息
+	 */
+	public Set<Message> getFromMessages() {
+		return fromMessages;
+	}
+
+	/**
+	 * 设置发送的消息
+	 * 
+	 * @param fromMessages
+	 *            发送的消息
+	 */
+	public void setFromMessages(Set<Message> fromMessages) {
+		this.fromMessages = fromMessages;
+	}
+
+	/**
+	 * 获取接收的消息
+	 * 
+	 * @return 接收的消息
+	 */
+	public Set<Message> getToMessages() {
+		return toMessages;
+	}
+
+	/**
+	 * 设置接收的消息
+	 * 
+	 * @param toMessages
+	 *            接收的消息
+	 */
+	public void setToMessages(Set<Message> toMessages) {
+		this.toMessages = toMessages;
+	}
+
+	/**
+	 * 获取用户1的消息组
+	 * 
+	 * @return 用户1的消息组
+	 */
+	public Set<MessageGroup> getUser1MessageGroups() {
+		return user1MessageGroups;
+	}
+
+	/**
+	 * 设置用户1的消息组
+	 * 
+	 * @param user1MessageGroups
+	 *            用户1的消息组
+	 */
+	public void setUser1MessageGroups(Set<MessageGroup> user1MessageGroups) {
+		this.user1MessageGroups = user1MessageGroups;
+	}
+
+	/**
+	 * 获取用户2的消息组
+	 * 
+	 * @return 用户2的消息组
+	 */
+	public Set<MessageGroup> getUser2MessageGroups() {
+		return user2MessageGroups;
+	}
+
+	/**
+	 * 设置用户2的消息组
+	 * 
+	 * @param user2MessageGroups
+	 *            用户2的消息组
+	 */
+	public void setUser2MessageGroups(Set<MessageGroup> user2MessageGroups) {
+		this.user2MessageGroups = user2MessageGroups;
 	}
 
 	/**

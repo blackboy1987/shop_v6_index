@@ -1,18 +1,28 @@
 
 package com.igomall.entity;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.PreRemove;
+import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Entity - 商品分类
@@ -116,6 +126,46 @@ public class ProductCategory extends OrderedEntity<Long> {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@OrderBy("order asc")
 	private Set<Brand> brands = new HashSet<>();
+
+	/**
+	 * 关联促销
+	 */
+	@ManyToMany(fetch = FetchType.LAZY)
+	@OrderBy("order asc")
+	private Set<Promotion> promotions = new HashSet<>();
+
+	/**
+	 * 参数
+	 */
+	@OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OrderBy("order asc")
+	private Set<Parameter> parameters = new HashSet<>();
+
+	/**
+	 * 属性
+	 */
+	@OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OrderBy("order asc")
+	private Set<Attribute> attributes = new HashSet<>();
+
+	/**
+	 * 规格
+	 */
+	@OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OrderBy("order asc")
+	private Set<Specification> specifications = new HashSet<>();
+
+	/**
+	 * 店铺
+	 */
+	@ManyToMany(mappedBy = "productCategories", fetch = FetchType.LAZY)
+	private Set<Store> stores = new HashSet<>();
+
+	/**
+	 * 经营分类申请
+	 */
+	@OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Set<CategoryApplication> categoryApplications = new HashSet<>();
 
 	/**
 	 * 获取名称
@@ -309,7 +359,7 @@ public class ProductCategory extends OrderedEntity<Long> {
 
 	/**
 	 * 获取商品
-	 *
+	 * 
 	 * @return 商品
 	 */
 	public Set<Product> getProducts() {
@@ -318,7 +368,7 @@ public class ProductCategory extends OrderedEntity<Long> {
 
 	/**
 	 * 设置商品
-	 *
+	 * 
 	 * @param products
 	 *            商品
 	 */
@@ -328,7 +378,7 @@ public class ProductCategory extends OrderedEntity<Long> {
 
 	/**
 	 * 获取关联品牌
-	 *
+	 * 
 	 * @return 关联品牌
 	 */
 	public Set<Brand> getBrands() {
@@ -337,12 +387,126 @@ public class ProductCategory extends OrderedEntity<Long> {
 
 	/**
 	 * 设置关联品牌
-	 *
+	 * 
 	 * @param brands
 	 *            关联品牌
 	 */
 	public void setBrands(Set<Brand> brands) {
 		this.brands = brands;
+	}
+
+	/**
+	 * 获取关联促销
+	 * 
+	 * @return 关联促销
+	 */
+	public Set<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	/**
+	 * 设置关联促销
+	 * 
+	 * @param promotions
+	 *            关联促销
+	 */
+	public void setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
+	}
+
+	/**
+	 * 获取参数
+	 * 
+	 * @return 参数
+	 */
+	public Set<Parameter> getParameters() {
+		return parameters;
+	}
+
+	/**
+	 * 设置参数
+	 * 
+	 * @param parameters
+	 *            参数
+	 */
+	public void setParameters(Set<Parameter> parameters) {
+		this.parameters = parameters;
+	}
+
+	/**
+	 * 获取属性
+	 * 
+	 * @return 属性
+	 */
+	public Set<Attribute> getAttributes() {
+		return attributes;
+	}
+
+	/**
+	 * 设置属性
+	 * 
+	 * @param attributes
+	 *            属性
+	 */
+	public void setAttributes(Set<Attribute> attributes) {
+		this.attributes = attributes;
+	}
+
+	/**
+	 * 获取规格
+	 * 
+	 * @return 规格
+	 */
+	public Set<Specification> getSpecifications() {
+		return specifications;
+	}
+
+	/**
+	 * 设置规格
+	 * 
+	 * @param specifications
+	 *            规格
+	 */
+	public void setSpecifications(Set<Specification> specifications) {
+		this.specifications = specifications;
+	}
+
+	/**
+	 * 获取店铺
+	 * 
+	 * @return 店铺
+	 */
+	public Set<Store> getStores() {
+		return stores;
+	}
+
+	/**
+	 * 设置店铺
+	 * 
+	 * @param stores
+	 *            店铺
+	 */
+	public void setStores(Set<Store> stores) {
+		this.stores = stores;
+	}
+
+	/**
+	 * 获取经营分类申请
+	 * 
+	 * @return 经营分类申请
+	 */
+	public Set<CategoryApplication> getCategoryApplications() {
+		return categoryApplications;
+	}
+
+	/**
+	 * 设置经营分类申请
+	 * 
+	 * @param categoryApplications
+	 *            经营分类申请
+	 */
+	public void setCategoryApplications(Set<CategoryApplication> categoryApplications) {
+		this.categoryApplications = categoryApplications;
 	}
 
 	/**
@@ -398,6 +562,19 @@ public class ProductCategory extends OrderedEntity<Long> {
 		if (parent != null) {
 			parents.add(0, parent);
 			recursiveParents(parents, parent);
+		}
+	}
+
+	/**
+	 * 删除前处理
+	 */
+	@PreRemove
+	public void preRemove() {
+		Set<Store> stores = getStores();
+		if (stores != null) {
+			for (Store store : stores) {
+				store.getProductCategories().remove(this);
+			}
 		}
 	}
 

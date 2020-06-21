@@ -14,9 +14,10 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
-import com.igomall.BaseAttributeConverter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.igomall.BaseAttributeConverter;
 
 /**
  * Entity - 角色
