@@ -246,6 +246,12 @@ public class Setting implements Serializable {
 	private String hotSearch;
 
 	/**
+	 * 热门关键字
+	 */
+	@Length(max = 200)
+	private String keyWord;
+
+	/**
 	 * 联系地址
 	 */
 	@Length(max = 200)
@@ -780,6 +786,28 @@ public class Setting implements Serializable {
 			hotSearch = hotSearch.replaceAll("[,\\s]*,[,\\s]*", ",").replaceAll("^,|,$", StringUtils.EMPTY);
 		}
 		this.hotSearch = hotSearch;
+	}
+
+	/**
+	 * 获取热门关键字
+	 *
+	 * @return 热门关键字
+	 */
+	public String getKeyWord() {
+		return keyWord;
+	}
+
+	/**
+	 * 设置热门关键字
+	 *
+	 * @param keyWords
+	 *            热门关键字
+	 */
+	public void setKeyWord(String keyWord) {
+		if (keyWord != null) {
+			keyWord = keyWord.replaceAll("[,\\s]*,[,\\s]*", ",").replaceAll("^,|,$", StringUtils.EMPTY);
+		}
+		this.keyWord = keyWord;
 	}
 
 	/**
@@ -2137,6 +2165,15 @@ public class Setting implements Serializable {
 	 */
 	public String[] getHotSearches() {
 		return StringUtils.split(hotSearch, SEPARATOR);
+	}
+
+	/**
+	 * 获取热门搜索关键词
+	 *
+	 * @return 热门搜索关键词
+	 */
+	public String[] getKeyWords() {
+		return StringUtils.split(keyWord, SEPARATOR);
 	}
 
 	/**

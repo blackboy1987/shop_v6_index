@@ -29,6 +29,7 @@ dependencies {
     compile group: 'jaxen', name: 'jaxen', version: '1.2.0'
 
     compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.3.1.RELEASE'
 
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

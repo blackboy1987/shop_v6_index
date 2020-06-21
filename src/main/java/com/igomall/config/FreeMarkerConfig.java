@@ -1,7 +1,10 @@
 package com.igomall.config;
 
+import com.igomall.template.directive.ProductCategoryChildrenListDirective;
+import com.igomall.template.directive.ProductCategoryParentListDirective;
+import com.igomall.template.directive.ProductCategoryRootListDirective;
 import com.igomall.template.method.CurrencyMethod;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.igomall.util.SystemUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -19,7 +22,16 @@ public class FreeMarkerConfig {
     private ServletContext servletContext;
 
     @Resource
+    private SystemUtils systemUtils;
+
+    @Resource
     private CurrencyMethod currencyMethod;
+    @Resource
+    private ProductCategoryRootListDirective productCategoryRootListDirective;
+    @Resource
+    private ProductCategoryParentListDirective productCategoryParentListDirective;
+    @Resource
+    private ProductCategoryChildrenListDirective productCategoryChildrenListDirective;
 
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer(){
@@ -43,6 +55,7 @@ public class FreeMarkerConfig {
 
         Map<String,Object> freemarkerVariables = new HashMap<>();
         freemarkerVariables.put("base",servletContext.getContextPath());
+        freemarkerVariables.put("setting",SystemUtils.getSetting());
         /*freemarkerVariables.put("showPowered",);
         freemarkerVariables.put("message",);
         freemarkerVariables.put("abbreviate",);*/
@@ -65,11 +78,11 @@ public class FreeMarkerConfig {
         freemarkerVariables.put("member_attribute_list",);
         freemarkerVariables.put("navigation_list",);
         freemarkerVariables.put("order_count",);
-        freemarkerVariables.put("pagination",);
-        freemarkerVariables.put("product_category_children_list",);
-        freemarkerVariables.put("product_category_parent_list",);
-        freemarkerVariables.put("product_category_root_list",);
-        freemarkerVariables.put("product_count",);
+        freemarkerVariables.put("pagination",);*/
+        freemarkerVariables.put("product_category_children_list",productCategoryChildrenListDirective);
+        freemarkerVariables.put("product_category_parent_list",productCategoryParentListDirective);
+        freemarkerVariables.put("product_category_root_list",productCategoryRootListDirective);
+        /*freemarkerVariables.put("product_count",);
         freemarkerVariables.put("product_favorite",);
         freemarkerVariables.put("product_list",);
         freemarkerVariables.put("product_tag_list",);

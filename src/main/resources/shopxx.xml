@@ -4,6 +4,7 @@
 	<setting name="siteUrl" value="http://localhost:8080" />
 	<setting name="logo" value="http://localhost:8080/upload/image/logo/7b89fdc7-187f-426e-bf56-60c2a92e7509.png" />
 	<setting name="hotSearch" value="苹果,三星,索尼,华为,魅族,佳能,小米,美的,格力" />
+	<setting name="keyWord" value="苹果1,三星1,索尼1,华为1,魅族1,佳能1,小米1,美的1,格力1" />
 	<setting name="address" value="深圳经济技术开发区" />
 	<setting name="phone" value="600-888666" />
 	<setting name="zipCode" value="500000" />

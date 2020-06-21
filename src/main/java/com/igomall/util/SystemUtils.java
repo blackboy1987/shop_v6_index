@@ -22,6 +22,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.ResourceUtils;
 
@@ -35,6 +36,7 @@ import net.sf.ehcache.Element;
  * @author 好源++ Team
  * @version 6.1
  */
+@Component
 public final class SystemUtils {
 
 	/**

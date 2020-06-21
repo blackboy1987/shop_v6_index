@@ -1,10 +1,877 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="keywords" content="Bizpower商城系统演示站 - Bizpower多用户商城系统"/>
+    <meta name="description" content="Bizpower商城系统演示站 - Bizpower多用户商城系统"/>
+    <meta name="author" content="Bizpower"/>
+    <meta name="copyright" content="Bizpower Inc. All Rights Reserved"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,IE=EmulateIE8,chrome=1">
+    <meta name="keywords" content="Bizpower商城系统演示站">
+    <meta name="description" content="Bizpower商城系统演示站">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="generator" content="UG93ZXJlZCBCeSBTaG9wTkMubmV0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="author" content="Bizpower-Developers"/>
+    <title>Bizpower商城系统演示站 - Powered by Bizpower</title>
+    <!-- ================== 开始基础CSS调用 ================== -->
+    <link href="http://publicjava.bizpower.com/css/base.css" rel="stylesheet" type="text/css">
+    <!--<link href="http://publicjava.bizpower.com/css/animate.min.css" rel="stylesheet" type="text/css">-->
+    <link href="http://staticjava.bizpower.com/css/web_common.css" rel="stylesheet" type="text/css">
+    <link href="http://staticjava.bizpower.com/toolkit/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="http://publicjava.bizpower.com/toolkit/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet"/>
+    <!--[if IE 7]>
+    <link href="http://staticjava.bizpower.com/toolkit/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <![endif]-->
+    <!-- ================== 结束基础CSS调用 ================== -->
+    <!-- ================== 开始页面CSS调用 ================== -->
+    <link href="http://staticjava.bizpower.com/css/home_layout.css" rel="stylesheet" type="text/css">
+
+    <!-- ================== 结束页面CSS调用 ================== -->
+    <!--[if lt IE 9]>
+    <script src="http://publicjava.bizpower.com/toolkit/crossbrowserjs/es5-shim.min.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/crossbrowserjs/html5shiv.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/crossbrowserjs/excanvas.min.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/crossbrowserjs/respond.min.js"></script>
+    <![endif]-->
+    <!-- ================== 开始基础JavaScript调用 ================== -->
+    <script>
+        //全局方法设置
+        var ncGlobal = {
+            webRoot:"http://java.bizpower.com/web/",
+            memberRoot:"http://java.bizpower.com/web/member/",
+            wapRoot:"http://java.bizpower.com/wap/",
+            ncToken:"7b7343e61b8eb26abe9306fb5685744b",
+            jsRoot:"http://staticjava.bizpower.com/js/",
+            cssRoot:"http://staticjava.bizpower.com/css/",
+            imgRoot:"http://staticjava.bizpower.com/img/",
+            toolkitRoot:"http://staticjava.bizpower.com/toolkit/",
+            uploadRoot:"http://uploadjava.bizpower.com/",
+            publicRoot:"http://publicjava.bizpower.com/",
+            imRoot:"http://java.bizpower.com:3001/",
+            tid:"",
+            loginUrl:"http://java.bizpower.com/web/login",
+            amapKey:'0ea9adbeaa5455d2c5c511e03d994b25'
+        };
+    </script>
+    <!-- Copyright: 天津网城商动科技有限责任公司 -->
+    <script src="http://publicjava.bizpower.com/lang/common.zh_CN.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/jquery/1.8.3/jquery.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <link href="http://publicjava.bizpower.com/toolkit/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet"/>
+    <script src="http://publicjava.bizpower.com/toolkit/jquery-nc/jquery.nc.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/layer/layer.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/jquery-validation/jquery.validation.min.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/waypoints/waypoints.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="http://publicjava.bizpower.com/toolkit/jquery-thumb/jqthumb.js"></script>
+    <script src="http://staticjava.bizpower.com/js/common/member.top.js"></script>
+
+
+    <!-- ================== 结束基础JavaScript调用 ================== -->
 </head>
 <body>
-${currency(12, true,true)}
+
+<div class="public-top-layout">
+    <div class="topbar wrapper">
+        <div class="left">
+            <div class="mall-home"><a href="http://java.bizpower.com/web/"><span class="icon"></span>返回商城首页</a></div>
+            <!-- s 配送至-->
+            <div class="my-city" id="shortCutMyCityPanel"></div >
+            <!-- E 配送至-->
+        </div >
+        <div class="right" id="quickMenu">
+            <dl class="top-menu login">
+                <dt class="top-menu-title normal"><a href="http://java.bizpower.com/web/login" class="login-link">您好，请登录</a> <a href="http://java.bizpower.com/web/register">免费注册</a></dt>
+            </dl>
+            <dl class="top-menu my-order">
+                <dt class="top-menu-title"><a target="_blank" href="http://java.bizpower.com/web/member/orders/list">我的订单</a><span class="arrow"></span></dt>
+                <dd class="top-menu-con">
+                    <ul>
+                        <li><a target="_blank" href="http://java.bizpower.com/web/member/orders/list/?ordersState=new">待支付</a></li>
+                        <li><a target="_blank" href="http://java.bizpower.com/web/member/orders/list/?ordersState=send">待确认</a></li>
+                        <li><a target="_blank" href="http://java.bizpower.com/web/member/orders/list/?ordersState=noeval">待评价</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="top-menu my-mall">
+                <dt class="top-menu-title"><a target="_blank" href="http://java.bizpower.com/web/member/">我的商城</a><span class="arrow"></span></dt>
+                <dd class="top-menu-con">
+                    <ul class="user-centent-menu">
+                        <li><a href="http://java.bizpower.com/web/member/message/list" target="_top">站内消息</a></li>
+                        <li><a href="http://java.bizpower.com/web/member/consult/list" target="_top">咨询回复</a></li>
+                        <li><a href="http://java.bizpower.com/web/member/favorites/goods" target="_top">我的收藏</a></li>
+                        <li><a href="http://java.bizpower.com/web/member/goodsbrowse" target="_top">我的足迹</a></li>
+                        <li><a href="http://java.bizpower.com/web/member/pointslog" target="_top">我的积分</a></li>
+                        <li><a href="http://java.bizpower.com/web/member/voucher/index" target="_top">我的优惠券</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="top-menu call-center">
+                <dt class="top-menu-title">客户服务<span class="arrow"></span></dt>
+                <dd class="top-menu-con">
+                    <ul>
+                        <li><a target="_blank" href="http://www.shopnc.net" target="_blank">测试</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="top-menu mobile-mall">
+                <dt class="top-menu-title"><span class="icon"></span>手机商城<span class="arrow"></span></dt>
+                <dd class="staticCode"><img src="http://uploadjava.bizpower.com/qr/app/url.gif"></dd>
+                <dd class="top-menu-con" style="width: 320px"> <span class="QRcode"> <img src="http://uploadjava.bizpower.com/qr/app/url.gif">
+          <p>下载手机客户端<br/>
+            享受更多促销活动</p>
+          </span>  <span class="QRcode">
+          <div class="line"></div>
+          <img src="http://uploadjava.bizpower.com/image/33/f5/33f5b958de4d5f138753ac38fef84219.jpg">
+          <p>微信扫一扫<br>
+            进入微信商城</p>
+          </span>  </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="header-wrap" id="headerWrap">
+    <header class="public-head-layout wrapper">
+        <h1 class="site-logo">
+            <a href="${base}/">
+                <img class="logo" src="${setting.logo}" alt="${setting.siteName}">
+            </a>
+        </h1>
+        <div class="head-search-layout">
+            <div class="head-search-tab" id="searchTab">
+                <span><a href="javascript:;" class="selected" data-sign="goods">商品</a></span>
+                <span><a href="javascript:;" class="" data-sign="store">店铺</a></span>
+                <span><a href="javascript:;" class="" data-sign="distribution">推广</a></span>
+                <span><a href="javascript:;" class="" data-sign="purchase">求购</a></span>
+            </div>
+            <div class="head-search-bar" id="head-search-bar">
+                <form action="http://java.bizpower.com/web/search" method="get" class="search-form" id="headerSearchForm">
+                    <input name="keyword" id="keyword" type="text" class="input-text" value="" maxlength="60" placeholder=" 请输入您要搜索的商品关键字"  autocomplete="off" />
+                    <input type="submit" id="buttonSearch" value="搜 索" class="input-submit">
+                </form>
+                <!-- 搜索提示div 开始 -->
+                <div class="search-tip search-tip-fixed" id="search-tip">
+                    <div class="search-history">
+                        <div class="title">历史纪录<a href="javascript:void(0);" id="search-his-del">清除</a></div>
+                        <ul id="search-his-list">
+                        </ul>
+                    </div>
+                    [#if setting.hotSearches?has_content]
+                    <div class="search-hot">
+                        <div class="title">热门搜索...</div>
+                        <ul>
+                            [#list setting.hotSearches as hotSearch]
+                            <li><a data-hot-value="${hotSearch}" hotSearch href="${base}/product/search?keyword=${hotSearch?url}">${hotSearch}</a></li>
+                            [/#list]
+                        </ul>
+                    </div>
+                    [/#if]
+                </div>
+                <!-- 搜索提示div 结束 -->
+            </div>
+            [#if setting.keyWords?has_content]
+            <div class="keyword">热门关键字：
+                <ul>
+                    [#list setting.keyWords as keyWord]
+                    <li><a data-hot-value="${keyWord}" hotSearch href="${base}/product/search?keyword=${keyWord?url}">${keyWord}</a></li>
+                    [/#list]
+                </ul>
+            </div>
+            [/#if]
+        </div>
+        <!-- 头部购物车_Star -->
+        <div id="topMyCart" class="my-cart">
+            <div class="my-cart-tit"><i class="my-cart-ico"></i><i data-red-point style="display: none;" class="my-cart-count"></i><a target="_blank" href="http://java.bizpower.com/web/cart/list" title="购物车">我的购物车</a></div>
+            <div class="my-cart-con">
+                <div class="spacer"></div>
+                <div class="sub-title" >
+                    <h4>最新加入的商品</h4 >
+                </div >
+                <div class="incart-goods-box">
+                    <div class="incart-goods" data-cart-goods-list> <img class="loading" src="http://staticjava.bizpower.com/img//cart_loading.gif"  alt=""/> </div >
+                </div >
+                <div class="checkout" data-goods-price></div>
+            </div >
+        </div>
+        <!-- 头部购物车_End -->
+    </header>
+</div>
+<nav class="public-nav-layout " id="publicNavLayout">
+    <div class="wrapper">
+        <div class="all-category">
+            <div class="title">
+                <h3><a target="_blank" href="${base}/product_category">所有商品分类</a></h3>
+                <i class="arrow-down"></i>
+            </div><!-- Copyright: Bizpower多用户商城系统 -->
+            <div class="min-title">
+                <a target="_blank" href="${base}/product_category">全部分类</a>
+                <span class="arrow-down"></span>
+            </div>
+            [@product_category_root_list count = 11]
+            [#include "/include/category.html" /]
+        </div>
+        [/@product_category_root_list]
+        <ul class="site-menu">
+            <li><a href="http://java.bizpower.com/web/" class="current">首页</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/brand" >品牌</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/pointscenter/index" >积分中心</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/vouchercenter/index" >领券中心</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/distribution" >推广分佣</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/trys" >试用</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/seckill" >秒杀</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/advertorial/article/list">推文</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/theme/2" target="_blank">全球购</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/channel/3" target="_blank">数码</a></li>
+            <li><a target="_blank" href="http://java.bizpower.com/web/channel/1" target="_blank">服饰</a></li>
+        </ul>
+        <div class="mobil-mall-ad"><img src="http://staticjava.bizpower.com/img/top_app_c2hvcG5j.gif"/></div>
+    </div>
+</nav>
+<div class="index-fixed-bar" id="indexFixedBar" style="display: none;"></div>
+<script src="http://staticjava.bizpower.com/js/common/header.js"></script>
+<link href="http://staticjava.bizpower.com/css/web_toolbar.css" rel="stylesheet" type="text/css">
+<div class="nc-toolbar-wrap" id="ncGlobalToolbar">
+    <div class="nc-toolbar">
+        <!-- S 弹出层区域 -->
+        <div class="nc-toolbar-panels">
+            <!-- S 会员信息展示区域 -->
+            <div data-nc-tbar-name="member" class="nc-toolbar-panel nc-tbar-panel-jdvip" style="visibility: visible; z-index: 2;">
+                <h3 class="nc-tbar-panel-header J-panel-header"> <span class="title"> <i></i> <em class="title">商城会员</em> </span> <span class="close-panel" data-nc-tbar-close></span> </h3>
+                <div class="nc-tbar-panel-main">  </div>
+                <div class="nc-tbar-panel-footer"></div>
+            </div>
+            <!-- E 会员信息展示区域 -->
+
+            <!-- S 购物车展示区域 -->
+            <div data-nc-tbar-name="cart" class="nc-toolbar-panel nc-tbar-panel-cart" style="visibility: visible; z-index: 2;">
+                <h3 class="nc-tbar-panel-header J-panel-header"> <a href="http://java.bizpower.com/web/cart/list" target="_blank" class="title" > <i></i> <em class="title">购物车</em> </a> <span class="close-panel"></span> </h3>
+                <div class="nc-tbar-panel-main">
+                    <div class="nc-tbar-panel-content" style="height: 566px;">
+                        <div>
+                            <div class="nc-tbar-cart-list" id="tbarCartGoodsList">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nc-tbar-panel-footer">
+                    <div class="nc-tbar-checkout" data-goods-price>
+                        <div class="jtc-number">共&nbsp;<strong id="tbarCartCount">0</strong>&nbsp;种商品</div>
+                        <div class="jtc-sum"> 共计： <strong class="tbarCartotal" id="tbarCartotal"></strong> </div>
+                        <a class="jtc-btn" href="http://java.bizpower.com/web/cart/list" target="_blank">去购物车结算</a> </div>
+                </div>
+            </div>
+            <!-- E 购物车展示区域 -->
+
+            <!-- S 关注 -->
+            <div data-nc-tbar-name="follow" class="nc-toolbar-panel nc-tbar-panel-follow">
+                <h3 class="nc-tbar-panel-header J-panel-header"> <a href="javascript:;" class="title" > <i></i> <em class="title">我的收藏</em> </a> <span class="close-panel"></span> </h3>
+                <div class="nc-tbar-panel-main">
+                    <div class="follow-tabnav">
+                        <ul>
+                            <li class="ui-switchable-item curr" data-nc-index="goods"> <a>商品</a> <span></span> </li>
+                            <li class="ui-switchable-item" data-nc-index="store" style="border-right:0;"> <a>店铺</a> </li>
+                        </ul>
+                    </div>
+                    <div class="nc-tbar-panel-content">
+                        <div class="follow-tabcontents" id="tbarFollowTab">
+                            <div id="tbarFollowTabPanel" style="width:600px;position:relative">
+                                <div class="follow-tab-content follow-product-list follow-tab-content-slected" id="followTabContent_goods">
+                                    <ul id="goodsFavListTbarFollow">
+                                    </ul>
+                                    <a href="http://java.bizpower.com/web/member/favorites/goods" class="follow-bottom-more" target="_blank">查看更多收藏商品 &gt;&gt;</a> </div>
+                                <div class="follow-tab-content follow-shop-list" id="followTabContent_store">
+                                    <ul id="storeFavListTbarFollow">
+                                    </ul>
+                                    <a href="http://java.bizpower.com/web/member/favorites/store" class="follow-bottom-more" target="_blank">查看更多关注店铺 &gt;&gt;</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nc-tbar-panel-footer J-panel-footer"></div>
+            </div>
+            <!-- E 关注 -->
+
+            <!-- S 足迹 -->
+            <div data-nc-tbar-name="history"  class="nc-toolbar-panel nc-tbar-panel-history">
+                <h3 class="nc-tbar-panel-header"> <a href="javascript:;" class="title"> <i></i> <em class="title">我的足迹</em> </a> <span class="close-panel"></span> </h3>
+                <div class="nc-tbar-panel-main">
+                    <div class="nc-tbar-panel-content" id="histbarPanelContent" >
+                        <div class="jt-history-wrap">
+                            <ul id="hisListTbar">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tbar-panel-footer"></div>
+            </div>
+            <!-- E 足迹 -->
+
+            <!-- S 二维码展示区域 -->
+            <div class="nc-toolbar-panel nc-tbar-panel-qrcode"  data-nc-tbar-name="qrcode" >
+                <h3 class="nc-tbar-panel-header J-panel-header"> <i></i> <em class="title">二维码</em><span class="close-panel"></span> </h3>
+                <div class="nc-qrcode-container">
+                    <div class="nc-tbar-qrcode-item">
+                        <img src="http://uploadjava.bizpower.com/qr/app/url.gif">
+                        <div class="nc-app-download">
+                            <h1>扫描二维码<br/>下载手机客户端</h1>
+                        </div>
+                    </div>
+                    <div class="nc-tbar-qrcode-item">
+                        <img src="http://uploadjava.bizpower.com/image/33/f5/33f5b958de4d5f138753ac38fef84219.jpg">
+                        <div class="nc-app-download">
+                            <h1 style="color:green">关注商城微信号<br>访问微信商城演示</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- E 二维码展示区域 -->
+
+            <!-- S 优惠券展示区域 -->
+            <div data-nc-tbar-name="couponActivity" class="nc-toolbar-panel nc-tbar-panel-coupon" style="visibility: visible; z-index: 2;">
+                <h3 class="nc-tbar-panel-header J-panel-header">
+                    <span class="title"><i></i><em class="title">优惠券</em></span>
+                    <span class="close-panel" data-nc-tbar-close></span>
+                </h3>
+                <div class="nc-tbar-panel-main">
+                    <div class="nc-tbar-panel-content">
+                        <div><div class="nc-tbar-coupon-activity-list" id="tbarCouponActivityList"></div></div>
+                    </div>
+                </div>
+                <div class="nc-tbar-panel-footer"></div>
+
+                <!-- S 优惠券活动项模板 -->
+                <script type="text/html" id="couponActivityItemModel">
+                    <div class="coupon-activity-item <% if(searchCouponActivityVo.searchDataSource=='coupon') { %>platform<% } %>" id="couponActivityItem_<%- searchCouponActivityVo.searchSn %>" >
+                        <div class="v-type">
+                            <!-- 优惠券金额 -->
+                            <div class="v-price"><strong class="number number-20 number-36"><%= Nc.priceFormatNew(searchCouponActivityVo.couponPrice) %></strong><div class="txt"><span><%- searchCouponActivityVo.limitAmountText %></span></div></div>
+                            <div class="v-range">
+                                <!-- 优惠券使用范围 -->
+                                <div class="range-item"><p><%- searchCouponActivityVo.useGoodsRangeExplain %></p></div>
+                                <!-- 优惠券使用平台类型 -->
+                                <% if(searchCouponActivityVo.usableClientType!="all") { %>
+                                <div class="range-item"><%- searchCouponActivityVo.usableClientTypeText %></div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="v-opbtns">
+                            <a href="javascript:;" nc-type="receiveBlock" data-search-sn="<%- searchCouponActivityVo.searchSn %>" <% if(memberIsReceive==1) { %>style="display:none;"<% } %>><b class="semi-circle"></b>立即领取</a>
+                            <a href="javascript:;" nc-type="toGoodsListBlock" data-search-data-source="<%- searchCouponActivityVo.searchDataSource %>" data-store-id="<%- searchCouponActivityVo.storeId %>" data-activity-id="<%- searchCouponActivityVo.activityId %>" <% if(memberIsReceive==0) { %>style="display:none;"<% } %>><b class="semi-circle"></b>立即使用</a>
+                        </div>
+                        <div class="v-state">
+                            <div class="btn-state <% if(memberIsReceive==1) { %>btn-geted<% } %>" nc-type="stateBlock"></div>
+                        </div>
+                    </div>
+                </script>
+                <!-- E 优惠券活动项模板 -->
+                <!-- S 暂无优惠券活动模板 -->
+                <script type="text/html" id="couponActivityNoDataModel">
+                    <div class="nc-tbar-tipbox2">
+                        <div class="tip-inner">
+                            <i class="i-face-fd"></i>
+                            <div class="tip-text">暂无可领的优惠券~</div>
+                        </div>
+                    </div>
+                </script>
+                <!-- E 暂无优惠券活动模板 -->
+            </div>
+            <!-- E 优惠券展示区域 -->
+        </div>
+        <!-- E 弹出层区域 -->
+
+        <div class="nc-toolbar-header"></div>
+
+        <!-- S 悬浮小图展示区域 -->
+        <div class="nc-toolbar-tabs"> <!-- 会员 -->
+            <div data-nc-tag-type="member" class="nc-toolbar-tab nc-tbar-tab-user"> <i class="tab-tip"></i> <i class="tab-ico"></i> <em class="tab-text">商城会员</em> </div>
+            <!-- 购物车 -->
+            <div data-nc-tag-type="cart" class="nc-toolbar-tab nc-tbar-tab-cart" > <i class="tab-ico"></i> <em class="tab-text">购物车</em> <span class="tab-sub" style="display: none;" id="tbarCartNum"></span> </div>
+            <!-- 优惠券 -->
+            <div data-nc-tag-type="couponActivity" class="nc-toolbar-tab nc-tbar-tab-coupon" style="display: none;"> <i class="tab-ico"></i> <em class="tab-text">优惠券</em></div>
+            <!-- 关注 -->
+            <div data-nc-tag-type="follow" class="nc-toolbar-tab nc-tbar-tab-follow" > <i class="tab-ico"></i> <em class="tab-text">我的收藏</em> </div>
+            <!-- 足迹 -->
+            <div data-nc-tag-type="history" class="nc-toolbar-tab nc-tbar-tab-history" > <i class="tab-ico"></i> <em class="tab-text">我的足迹</em> </div>
+            <!-- 消息 -->
+            <div data-nc-tag-type="message" class="nc-toolbar-tab nc-tbar-tab-message"> <a href="javascript:;"> <i class="tab-ico"></i> <em class="tab-text">我的消息</em> </a> </div>
+            <!-- 二维码 -->
+            <div data-nc-tag-type="qrcode" class="nc-toolbar-tab nc-tbar-tab-qrCode"><i class="tab-ico"></i><em class="tab-text">二维码</em></div>
+        </div>
+        <!-- E 悬浮小图展示区域 -->
+
+        <div class="nc-toolbar-footer">
+            <div class=" nc-toolbar-tab nc-tbar-tab-top"> <a href="javascript:;" id="tbarGoTop"> <i class="tab-ico"></i> <em class="tab-text">顶部</em> </a> </div>
+        </div>
+
+        <div class="nc-toolbar-mini"></div>
+
+    </div>
+</div>
+
+<link href="http://publicjava.bizpower.com/toolkit/perfect-scrollbar/v120/perfect-scrollbar.min.css" rel="stylesheet"/>
+<script src="http://publicjava.bizpower.com/toolkit/perfect-scrollbar/v120/perfect-scrollbar.min.js"></script>
+<script src="http://staticjava.bizpower.com/js/common/toolbar.js"></script>
+
+<link href="http://staticjava.bizpower.com/css/web_index.css" rel="stylesheet"/>
+<div class="home-focus-layout" id="homeFocusLayout">
+    <div class="focus">
+        <ul id="homeTopBanner">
+
+            <li >
+                <a  href="javascript:;" >
+                    <img src="http://uploadjava.bizpower.com/image/b6/9e/b69e20006df89c7e3b4836431c3848f6.png" height="440" width="730"/>
+                </a>
+            </li>
+            <li >
+                <a  href="javascript:;" >
+                    <img src="http://uploadjava.bizpower.com/image/44/cd/44cde3c2ccd37cab02bd046b6970beb9.png" height="440" width="730"/>
+                </a>
+            </li>
+            <li >
+                <a  href="http://java.bizpower.com/web/advertorial/article/list" target="_blank">
+                    <img src="http://uploadjava.bizpower.com/image/49/eb/49eb459fbda20b6a7cb35ca946290d2f.png" height="440" width="730"/>
+                </a>
+            </li>
+            <li >
+                <a  href="http://java.bizpower.com/web/store/6" target="_blank">
+                    <img src="http://uploadjava.bizpower.com/image/ec/9c/ec9c3bc5f3d8d5b7a1faac4d7ffb3a87.png" height="440" width="730"/>
+                </a>
+            </li>
+            <li >
+                <a  href="http://java.bizpower.com/web/search?cat=1037" target="_blank">
+                    <img src="http://uploadjava.bizpower.com/image/36/fc/36fc98921f02045389e772ac3be4693d.png" height="440" width="730"/>
+                </a>
+            </li>
+        </ul >
+    </div>
+    <div class="right-bar">
+        <div class="title">
+            <h2>商城快讯</h2>
+        </div>
+        <div class="content-news">
+            <ul>
+                <li><a target="_blank" href="http://java.bizpower.com/web/article/info/33">【特惠】全场图书优惠促销火爆销售中</a></li>
+                <li><a target="_blank" href="http://java.bizpower.com/web/article/info/32">【公告】Bizpower商城火热上线</a></li>
+                <li><a target="_blank" href="#">【公告】管理功能说明</a></li>
+            </ul>
+        </div>
+        <div class="title">
+            <h2>商城服务</h2>
+        </div>
+        <div class="contnet-function">
+            <ul>
+                <li><a target="_blank" href="http://java.bizpower.com/seller/open"><i class="tb-01"></i>招商入驻</a></li>
+                <li><a target="_blank" href="http://java.bizpower.com/seller/"><i class="tb-02"></i>商家中心</a></li>
+                <li><a target="_blank" href="http://java.bizpower.com/chain/"><i class="tb-03"></i>门店管理</a></li>
+                <li><a href="javascript:;"><i class="tb-04"></i>正品保障</a></li>
+                <li><a href="javascript:;"><i class="tb-05"></i>闪电发货</a></li>
+                <li><a href="javascript:;"><i class="tb-06"></i>七天退换</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 四图推荐 -->
+<!-- Copyright: Bizpower多用户商城系统 -->
+
+
+
+
+<!-- Copyright: 天津网城商动科技有限责任公司 -->
+<!-- 秒杀专区 -->
+<div class="home-seckill-layout">
+    <div class="seckill-box">
+        <div class="seckill-title">
+            <div class="title">
+                <h3></h3>
+                <div class="countdown">
+                    <span class="tip">距离下场</span>
+                    <span class="timer" id="seckillTimeDown"></span>
+
+                </div>
+
+            </div>
+            <a class="more" href="http://java.bizpower.com/web/seckill">更多抢购<i class="fa fa-chevron-circle-right  m-l-5"></i></a>
+        </div>
+        <div class="seckill-content">
+            <ul class="sk-ul" id="homeSeckill">
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/850" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/b0/2e/b02e03e3f155a91d73f32c2150f7529b.jpg">
+                            <p class="sk-name">力士 (LUX) 精油香氛沐浴露 幽莲魅肤1KG 各种肤质 成人 香氛浴露</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>19</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>29</span><span class='pointer'>.</span><span class='decimal'>90</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/325" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/1d/61/1d61396a66688d539d79f2b739e0062c.jpg">
+                            <p class="sk-name">西门子（SIEMENS） XQG90-WM12U4600W  全触控面板 加速洗 节能洗 滚筒洗衣机</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>5000</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>5299</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/316" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/a0/58/a0589865954cc79ae1443c2c3d37e1dd.jpg">
+                            <p class="sk-name">飞利浦(Philips) 高清网络平板电视机 无线WiFi 智能八核LED液晶</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>1200</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>1299</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/179" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/84/bc/84bcec6131b9f51e2e0532e6012837f9.jpg">
+                            <p class="sk-name">华为（HUAWEI） WS550 450M无线路由器</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>69</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>89</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/130" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/e1/c3/e1c3b7b63cb3c10ac3f5115934a9af1c.jpg">
+                            <p class="sk-name">Edifier/漫步者 E235电视家庭2.1音响无线蓝牙多媒体音箱重低音炮</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>100</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>1688</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/54" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/cd/e7/cde7840945ba397e73d4c8bd91c2e7fc.jpg">
+                            <p class="sk-name">Huawei/华为 MateBook HZ-W09 WIFI 128GB M3</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>4000</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>4988</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/64" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/7f/d4/7fd459e72a62e4cd44cfa87fd46200e4.jpg">
+                            <p class="sk-name">Huawei/华为 B3智能手环 现货抢购</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>900</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>999</span><span class='pointer'>.</span><span class='decimal'>00</span></span>
+                    </p>
+                </li>
+                <li class="sk-items">
+                    <div class="sk-goods-info">
+                        <a href="http://java.bizpower.com/web/goods/87" target="_blank" class="sk-link">
+                            <img title="" alt="" src="http://uploadjava.bizpower.com/image/e6/6c/e66c3ebcff7c6e32552a98b3f3c12cc9.jpg">
+                            <p class="sk-name">Huawei/华为 AM08小天鹅无线蓝牙音响4.0</p>
+                        </a>
+                        <span class="sk-shadow"></span>
+                    </div>
+                    <p class="sk-price">
+                        <span class="price-new"><span class='yuan'>￥</span><span class='integer'>26</span><span class='pointer'>.</span><span class='decimal'>03</span></span>
+                        <span class="price-original"><span class='yuan'>￥</span><span class='integer'>66</span><span class='pointer'>.</span><span class='decimal'>03</span></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 关联楼层 -->
+<ul id="nav" class="page-nav">
+</ul>
+
+<!-- Copyright: Bizpower多用户商城系统 -->
+[@product_category_root_list count = 5]
+[#list productCategories as productCategory]
+<div id="floor_${productCategory_index + 1}" class="home-standard-layout home-style-3" data-nc-floor-panel>
+    <div class="w floor floor-t8 com-floor floorOne clearfix" style="border-color: #5f6cb7">
+        <div class="title" style="background: #eff0f8">
+            <div class="title-name"><span class="border" style="background: #5f6cb7"></span>
+                <p class="name" style="color: #5f6cb7">${productCategory.name}</p>
+            </div>
+            <div class="keyword clearfix">
+                <a href="http://java.bizpower.com/web/search?keyword=%E5%86%B0%E7%AE%B1" target="_blank" title="mbItem.text!''">冰箱</a>
+                <a href="http://java.bizpower.com/web/search?keyword=%E6%B4%97%E8%A1%A3%E6%9C%BA" target="_blank" title="mbItem.text!''">洗衣机</a>
+                <a href="http://java.bizpower.com/web/search?keyword=%E7%83%AD%E6%B0%B4%E5%99%A8" target="_blank" title="mbItem.text!''">热水器</a>
+                <a href="http://java.bizpower.com/web/search?keyword=%E7%A9%BA%E8%B0%83" target="_blank" title="mbItem.text!''">空调</a>
+                <a href="http://java.bizpower.com/web/search?keyword=%E7%94%B5%E8%A7%86" target="_blank" title="mbItem.text!''">电视</a>
+                <a href="http://java.bizpower.com/web/search?keyword=%E7%87%83%E6%B0%94%E7%81%B6" target="_blank" title="mbItem.text!''">燃气灶</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="left-img">
+
+                <img class="J-lazy" alt="电器城频道" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/13/99/1399de95d8986a773b99812a848e4c03.jpg">
+                <div class="cover"></div>
+                <p class="img-name">电器城频道</p>
+                <p class="img-desc">30天包退 365天包换</p>
+                <a href="http://java.bizpower.com/web/search?keyword=%E5%86%B0%E7%AE%B1" target="_blank"></a>
+
+            </div>
+            <ul class="img-list clearfix">
+
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/search?keyword=%E7%94%B5%E8%A7%86" target="_blank" class="click-wrapper">
+                        <p class="img-name">电视家影</p>
+                        <p class="img-desc" style="color: #5f6cb7">爆款直降1000</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/search?keyword=%E7%94%B5%E8%A7%86" target="_blank" >
+                        <img class="J-lazy" alt="电视家影" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/98/9b/989b3a96499a97726c3c1f9be33744b4.jpg">
+                    </a>
+                </li>
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/search?keyword=%E6%B5%B7%E5%B0%94" target="_blank" class="click-wrapper">
+                        <p class="img-name">海尔春节不打烊</p>
+                        <p class="img-desc" style="color: #5f6cb7">领券最高减300</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/search?keyword=%E6%B5%B7%E5%B0%94" target="_blank" >
+                        <img class="J-lazy" alt="海尔春节不打烊" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/78/83/788373c3982f1c4c62254c9b3a0607f8.jpg">
+                    </a>
+                </li>
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/search?keyword=%E7%A9%BA%E8%B0%83" target="_blank" class="click-wrapper">
+                        <p class="img-name">空调优惠不停</p>
+                        <p class="img-desc" style="color: #5f6cb7">爆款空调0元装</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/search?keyword=%E7%A9%BA%E8%B0%83" target="_blank" >
+                        <img class="J-lazy" alt="空调优惠不停" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/80/4e/804ef99dab45c08ec4f7fb56dbaea41e.jpg">
+                    </a>
+                </li>
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/search?keyword=%E7%83%AD%E6%B0%B4%E5%99%A8" target="_blank" class="click-wrapper">
+                        <p class="img-name">热水器专场</p>
+                        <p class="img-desc" style="color: #5f6cb7">50升热水器449元抢</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/search?keyword=%E7%83%AD%E6%B0%B4%E5%99%A8" target="_blank" >
+                        <img class="J-lazy" alt="热水器专场" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/31/03/31036af33d65be9603ef5b855256c330.jpg">
+                    </a>
+                </li>
+
+            </ul>
+
+            <a href="http://java.bizpower.com/web/search?cat=321" target="_blank" class="middle-img">
+                <img class="J-lazy" alt="厨房卫浴电器" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/2b/dc/2bdc2695d112f12ca0104c0391ebae67.jpg">
+                <div class="cover"></div>
+                <p class="img-name" style="color: #5f6cb7">厨房卫浴电器</p>
+                <p class="img-desc" style="color: #5f6cb7">免费枪888元神券</p>
+            </a>
+
+            <ul class="img-list clearfix list-right">
+
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/goods/853" target="_blank" class="click-wrapper">
+                        <p class="img-name">海尔空调</p>
+                        <p class="img-desc" style="color: #5f6cb7">3P匹冷暖客厅挂机空调</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/goods/853" target="_blank" >
+                        <img class="J-lazy" alt="海尔空调" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/d4/3b/d43b7cf1f857a10749fcb26d365c4795.jpg">
+                    </a>
+                </li>
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/goods/854" target="_blank" class="click-wrapper">
+                        <p class="img-name">美的惊喜红包</p>
+                        <p class="img-desc" style="color: #5f6cb7">咨询客再送美的电烤箱</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/goods/854" target="_blank" >
+                        <img class="J-lazy" alt="美的惊喜红包" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/01/f9/01f9781cbb48cf98f04288858e441e6c.png">
+                    </a>
+                </li>
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/search?keyword=%E5%86%B0%E7%AE%B1" target="_blank" class="click-wrapper">
+                        <p class="img-name">够鲜味，够年味</p>
+                        <p class="img-desc" style="color: #5f6cb7">爆款直降晒单送好礼</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/search?keyword=%E5%86%B0%E7%AE%B1" target="_blank" >
+                        <img class="J-lazy" alt="够鲜味，够年味" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/56/51/565108d0d6cfa548dfed6d1b4e9697ec.jpg">
+                    </a>
+                </li>
+                <li style="display: list-item;">
+                    <a href="http://java.bizpower.com/web/goods/315" target="_blank" class="click-wrapper">
+                        <p class="img-name">创维开门大吉</p>
+                        <p class="img-desc" style="color: #5f6cb7">下单最高减1000</p>
+                    </a>
+                    <a class="img-wrapper" href="http://java.bizpower.com/web/goods/315" target="_blank" >
+                        <img class="J-lazy" alt="创维开门大吉" src="http://staticjava.bizpower.com/img/transparent.gif" data-original="http://uploadjava.bizpower.com/image/27/ec/27ec6b500912bf25f4c5296c77ba1d75.jpg">
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+        [@brand_list productCategoryId = productCategory.id type = "IMAGE" count = 12]
+        <div class="brand-logo">
+            [#if brands?has_content]
+            <ul>
+                [#list brands as brand]
+                <li>
+                    <a href="${base}${brand.path}" title="${brand.name}" target="_blank">
+                        <img class="J-lazy" src="http://staticjava.bizpower.com/img/transparent.gif"  data-original="${brand.logo}" alt="${brand.name}">
+                    </a>
+                </li>
+                [/#list]
+            </ul>
+            [/#if]
+        </div>
+        [/@brand_list]
+    </div>
+</div>
+[/#list]
+[/@product_category_root_list]
+
+
+<!-- Copyright: www.Bizpower.com -->
+<div class="hr16"></div>
+<!-- 首页弹出层广告 -->
+<!-- Copyright: Bizpower多用户商城系统 -->
+<!-- 首页弹出广告 -->
+<div class="popup-ad-panel" id="popupAdPanel" data-enable="1" data-enable-every-time="0">
+    <a target="_blank" href="http://java.bizpower.com/web/coupon/gifts/receive/1">
+        <img src="http://uploadjava.bizpower.com/image/1a/41/1a41e9e85a05b3c2da2768828bbe3312.png">
+    </a>
+    <span class="close" id="popupAdCloseBtn"></span>
+</div>
+<div class="dialog-overlay" id="popupAdDialog">
+    <div class="overlay"></div>
+</div>
+
+<link href="http://publicjava.bizpower.com/toolkit/bxslider/jquery.bxslider.css" rel="stylesheet"/>
+<script>
+    ncGlobal.seckillTime = "63688";
+    ncGlobal.seckillSliderSwitch = true
+</script>
+<script src="http://publicjava.bizpower.com/toolkit/bxslider/jquery.bxslider.js"></script>
+<script src="http://publicjava.bizpower.com/toolkit/jquery-lazyload/jquery.lazyload.min.js"></script>
+<script src="http://staticjava.bizpower.com/js/home/home_index.js"></script>
+
+<div id="cti">
+    <div class="wrapper">
+        <ul>
+            <li><span class="line"></span> <span class="icon"> <img src="http://uploadjava.bizpower.com/image/8b/1e/8b1e841de37c5621e2fdab72d414d999.png@60w_60h"> </span> <span class="name">
+      	七天保障
+      	</span> </li>
+            <li><span class="line"></span> <span class="icon"> <img src="http://uploadjava.bizpower.com/image/92/70/9270953720669dcd666b0d2532ff7603.png@60w_60h"> </span> <span class="name">
+      	极速物流
+      	</span> </li>
+            <li><span class="line"></span> <span class="icon"> <img src="http://uploadjava.bizpower.com/image/53/e3/53e38bce224f08d9f21a5d113b2e2ccb.png@60w_60h"> </span> <span class="name">
+      	破损补寄
+      	</span> </li>
+            <li><span class="line"></span> <span class="icon"> <img src="http://uploadjava.bizpower.com/image/24/3f/243fee208175a77309b6bebfb567e82b.png@60w_60h"> </span> <span class="name">
+      	品质承诺
+      	</span> </li>
+        </ul>
+    </div>
+</div>
+<div id="faq">
+    <div class="wrapper">
+        <ul>
+            <li>
+                <dl class="s1">
+                    <dt> 帮助中心 </dt>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/27" title="积分细则">积分细则</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/12" title="查看售出商品">查看售出商品</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/10" title="查看已购买商品">查看已购买商品</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/9" title="我要买">我要买</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/8" title="忘记密码">忘记密码</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/7" title="如何搜索">如何搜索</a></dd>
+                </dl>
+            </li>
+            <li>
+                <dl class="s1">
+                    <dt> 店铺之家 </dt>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/40" title="如何进行结算">如何进行结算</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/39" title="如何发布促销">如何发布促销</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/15" title="如何申请开店">如何申请开店</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/14" title="商城商品推荐">商城商品推荐</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/13" title="如何发货">如何发货</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/11" title="如何管理店铺">如何管理店铺</a></dd>
+                </dl>
+            </li>
+            <li>
+                <dl class="s1">
+                    <dt> 支付方式 </dt>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/47" title="微信支付">微信支付</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/38" title="公司转账">公司转账</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/37" title="邮局汇款">邮局汇款</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/36" title="分期付款">分期付款</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/17" title="在线支付">在线支付</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/16" title="如何注册支付宝">如何注册支付宝</a></dd>
+                </dl>
+            </li>
+            <li>
+                <dl class="s1">
+                    <dt> 售后服务 </dt>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/46" title="纠纷处理">纠纷处理</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/42" title="取消订单">取消订单</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/41" title="联系卖家">联系卖家</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/26" title="退款申请">退款申请</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/25" title="退换货流程">退换货流程</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/24" title="退换货政策">退换货政策</a></dd>
+                </dl>
+            </li>
+            <li>
+                <dl class="s1">
+                    <dt> 客服中心 </dt>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/45" title="账户充值">账户充值</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/44" title="邮箱认证">邮箱认证</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/43" title="手机认证">手机认证</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/20" title="修改收货地址">修改收货地址</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/19" title="会员修改个人资料">会员修改个人资料</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/18" title="会员修改密码">会员修改密码</a></dd>
+                </dl>
+            </li>
+            <li>
+                <dl class="s1">
+                    <dt> 关于我们 </dt>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/111" title="联系我们">联系我们</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/53" title="加入我们">加入我们</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/52" title="发展历程">发展历程</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/48" title="关于我们">关于我们</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/23" title="合作及洽谈">合作及洽谈</a></dd>
+                    <dd><i></i><a target="_blank" href="http://java.bizpower.com/web/article/info/22" title="招聘英才">招聘英才</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="footer"><!-- Copyright: Bizpower多用户商城系统 -->
+    <div class="wrapper">
+        <p><a href="http://java.bizpower.com/web/">首页</a>
+            | <a target="_blank" href="" target="_blank">招聘英才</a>       | <a target="_blank" href="" target="_blank">合作及洽谈</a>       | <a target="_blank" href="" target="_blank">联系我们</a>       | <a target="_blank" href="" target="_blank">关于我们</a>
+        </p>
+        Copyright © 2019 Bizpower商城系统演示站,All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.beian.miit.gov.cn" target="_blank">津ICP备10001600号-17</a><br />
+        Powered by <span style="font-weight: 600;"><font style="color:orange;">Biz</font><font style="color:blue;">power</font></span><br />
+
+    </div>
+</div>
 </body>
 </html>
