@@ -26,7 +26,7 @@ public class IndexController extends BaseController {
 	 */
 	@GetMapping
 	public String index(ModelMap model) {
-		return "shop/index";
+		return "index";
 	}
 
 }

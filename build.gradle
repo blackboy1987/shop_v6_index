@@ -26,6 +26,7 @@ dependencies {
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.3.1.RELEASE'
 
+    compile group: 'jaxen', name: 'jaxen', version: '1.2.0'
 
     compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
 
