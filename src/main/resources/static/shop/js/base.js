@@ -1,11 +1,3 @@
-/*
- * Copyright 2008-2018 shopxx.net. All rights reserved.
- * Support: localhost
- * License: localhost/license
- * 
- * JavaScript - Base
- * Version: 6.1
- */
 
 (function($) {
 
